@@ -2,7 +2,7 @@
 <h2>User info</h2>
 <%= image_tag @user.get_profile_image(100,100) %>
  <% if @user == current_user %>
-   <p><%= link_to "プロフィール編集", edit_user_path %></p>
+   <p><%= link_to "Update User", edit_user_path %></p>
  <% end %>
 <table>
   <tbody>

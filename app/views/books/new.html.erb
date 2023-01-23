@@ -1,4 +1,12 @@
 <h2>New Book</h2>
+<% if @book.errors.any? %>
+  <h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
   <%= form_with model: @book do |f| %>
     <%= f.label :Title %><br>
     <%= f.text_field :title %><br>
