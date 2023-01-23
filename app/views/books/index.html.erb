@@ -1,0 +1,7 @@
+<% @books.each do |book| %>
+  <p><%= image_tag book.user.get_profile_image(50, 50) %></p>
+  <p><%= link_to book.title, book_path(book.id) %></p>
+  <!-- ↑link_toにしたい -->
+  <p><%= book.body %></p>
+<% end %>
+
