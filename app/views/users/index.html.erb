@@ -1,5 +1,9 @@
+<%= render 'user' %>
+
 <% @users.each do |user| %>
   <%= image_tag user.get_profile_image(50, 50) %>
   <%= user.name %>
   <%= link_to "Show", user_path(user.id) %>
 <% end %>
+
+<%= render 'homes/footer' %>

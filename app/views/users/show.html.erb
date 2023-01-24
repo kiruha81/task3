@@ -1,22 +1,4 @@
-<%= flash[:notice] %>
-<h2>User info</h2>
-<%= image_tag @user.get_profile_image(100,100) %>
- <% if @user == current_user %>
-   <p><%= link_to "Update User", edit_user_path %></p>
- <% end %>
-<table>
-  <tbody>
-    <tr></tr>
-    <tr>
-      <th>name</th>
-      <th><%= @user.name %></th>
-    </tr>
-    <tr>
-      <th>introduction</th>
-      <th><%= @user.introduction %></th>
-    </tr>
-  </tbody>
-</table>
+<%= render 'user' %>
 
 <% @books.each do |book| %>
   <p><%= link_to @user.name, user_path(@user.id) %></p>
@@ -24,3 +6,5 @@
   <!-- ↑link_toにしたい -->
   <p><%= book.body %></p>
 <% end %>
+
+<%= render 'homes/footer' %>
