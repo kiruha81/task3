@@ -1,32 +1,26 @@
 <h2>User info</h2>
-<%= image_tag @user.get_profile_image(100,100) %>
- <% if @user == current_user %>
-   <p><%= link_to "Update User", edit_user_path %></p>
- <% end %>
+<%= image_tag user.get_profile_image(100,100) %>
+ <% if user == current_user %>
+   <p><%= link_to "Update User", edit_user_path(user.id) %></p>
+  <% else %>
+    <p><%= link_to "Update User", user_path(current_user.id) %></p>
+  <% end %>
 <table>
   <tbody>
     <tr></tr>
     <tr>
       <th>name</th>
-      <th><%= @user.name %></th>
+      <th><%= user.name %></th>
     </tr>
     <tr>
       <th>introduction</th>
-      <th><%= @user.introduction %></th>
+      <th><%= user.introduction %></th>
     </tr>
   </tbody>
 </table>
 
 <h2>New Book</h2>
-<% if @book.errors.any? %>
-<h3><%= @book.errors.count %>error prohibited this obj from being saved:</h3>
-  <ul>
-    <% @book.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
-<% end %>
-<%= form_with model: @book do |f| %>
+<%= form_with model: book do |f| %>
   <%= f.label :Title %><br>
   <%= f.text_field :title %><br>
   <%= f.label :Opinion %><br>

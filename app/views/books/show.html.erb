@@ -1,13 +1,44 @@
 <%= flash[:notice] %>
-<h2>Book detail</h2>
-<p><%= link_to @user.name, user_path %></p>
-<p><%= link_to image_tag(@book.user.get_profile_image(50, 50)).to_s, user_path(@user.id) %></p>
-<p><%= @book.title %></p>
-<p><%= @book.body %></p>
+<% if @bookid.user_id != current_user.id %>
+  <%= image_tag @users.get_profile_image(100,100) %>
+  <% if @user == current_user %>
+    <p><%= link_to "Update User", edit_user_path(@user.id) %></p>
+  <% else %>
+    <p><%= link_to "Update User", user_path(current_user.id) %></p>
+  <% end %>
+  <table>
+    <tbody>
+      <tr></tr>
+      <tr>
+        <th>name</th>
+        <th><%= @users.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th><%= @user.introduction %></th>
+      </tr>
+    </tbody>
+  </table>
 
-<%= link_to "Edit", edit_book_path %>
-<% if @user.id == current_user.id %>
-  <%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？" %>
+  <h2>New Book</h2>
+  <%= form_with model: @books do |f| %>
+    <%= f.label :Title %><br>
+    <%= f.text_field :title %><br>
+    <%= f.label :Opinion %><br>
+    <%= f.text_area :body %><br>
+    <%= f.submit 'Create Book' %>
+  <% end %>
+<% else %>
+  <%= render 'users/user', user: @user, book: @book %>
 <% end %>
 
-<%= render 'homes/footer' %>
+<h2>Book detail</h2>
+<p><%= link_to @users.name, user_path(@users.id) %></p>
+<p><%= link_to image_tag(@bookid.user.get_profile_image(50, 50)).to_s, user_path(@users.id) %></p>
+<p><%= link_to @bookid.title, book_path(@bookid.id) %></p>
+<p><%= @bookid.body %></p>
+
+<% if @users.id == current_user.id %>
+  <%= link_to "Edit", edit_book_path(@bookid.id) %>
+  <%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？" %>
+<% end %>

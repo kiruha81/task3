@@ -1,10 +1,9 @@
-<%= render 'user' %>
+<%= flash[:notice] %>
+<%= render 'users/user', user: @user, book: @book %>
 
 <% @books.each do |book| %>
+  <p><%= link_to image_tag(@user.get_profile_image(50, 50)).to_s, user_path(@user.id) %></p>
   <p><%= link_to @user.name, user_path(@user.id) %></p>
-  <p><%= link_to book.title, book_path %></p>
-  <!-- ↑link_toにしたい -->
+  <p><%= link_to book.title, book_path(book.id) %></p>
   <p><%= book.body %></p>
 <% end %>
-
-<%= render 'homes/footer' %>
