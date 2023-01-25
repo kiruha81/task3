@@ -1,5 +1,5 @@
 <%= flash[:notice] %>
-<%= render 'users/user', user: @user, book: @book %>
+<%= render 'template/user', user: @user, book: @book %>
 
 <% @books.each do |book| %>
   <p><%= link_to image_tag(@user.get_profile_image(50, 50)).to_s, user_path(@user.id) %></p>

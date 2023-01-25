@@ -1,5 +1,5 @@
 <%= flash[:notice] %>
-<%= render 'users/user', user: @user, book: @book %>
+<%= render 'template/user', user: @user, book: @book %>
 
 <% if @book.errors.any? %>
   <%= @book.errors.count %>errors prohibited this obj from being saved:
