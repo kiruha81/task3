@@ -1,37 +1,51 @@
 <%= flash[:notice] %>
-<h2>User info</h2>
-<%= image_tag @users.get_profile_image(100,100) %>
-<p><%= link_to "Update User", edit_user_path(@user.id) %></p>
-<table>
-  <tbody>
-    <tr></tr>
-    <tr>
-      <th>name</th>
-      <th><%= @user.name %></th>
-    </tr>
-    <tr>
-      <th>introduction</th>
-      <th><%= @user.introduction %></th>
-    </tr>
-  </tbody>
-</table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+      <table>
+        <tbody>
+          <tr></tr>
+          <tr>
+            <th>name</th>
+            <th><%= @user.name %></th>
+          </tr>
+          <tr>
+            <th>introduction</th>
+            <th><%= @user.introduction %></th>
+          </tr>
+        </tbody>
+      </table>
+      <p><%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-block" do %>
+        <i class="fas fa-user-cog"></i>
+      <% end %></p>
+      <h2>New book</h2>
+      <%= form_with model: @book do |f| %>
+        <%= f.label :Title %><br>
+        <%= f.text_field :title %><br>
+        <%= f.label :Opinion %><br>
+        <%= f.text_area :body %><br>
+        <%= f.submit 'Create Book' %>
+      <% end %>
+    </div>
 
-<h2>New book</h2>
-<%= form_with model: @book do |f| %>
-  <%= f.label :Title %><br>
-  <%= f.text_field :title %><br>
-  <%= f.label :Opinion %><br>
-  <%= f.text_area :body %><br>
-  <%= f.submit 'Create Book' %>
-<% end %>
-
-<h2>Book detail</h2>
-<p><%= link_to @users.name, user_path(@users.id) %></p>
-<p><%= link_to image_tag(@bookid.user.get_profile_image(50, 50)).to_s, user_path(@users.id) %></p>
-<p><%= link_to @bookid.title, book_path(@bookid.id) %></p>
-<p><%= @bookid.body %></p>
-
-<% if @users.id == current_user.id %>
-  <%= link_to "Edit", edit_book_path(@bookid.id) %>
-  <%= link_to "Destroy", book_path, method: :delete, "data-confirm" => "本当に消しますか？" %>
-<% end %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td><%= link_to @user.name, user_path(@user.id) %></td>
+            <td><%= link_to image_tag(@bookid.user.get_profile_image(50, 50)).to_s, user_path(@user.id) %></td>
+            <td><%= link_to @bookid.title, book_path(@bookid.id) %></td>
+            <td><%= @bookid.body %></td>
+            <% if @user.id == current_user.id %>
+              <td><%= link_to "Edit", edit_book_path(@bookid.id), class: "btn btn-sm btn-success edit_book_58592" %></td>
+              <td><%= link_to("Destroy", book_path, method: :delete, data: {:confirm => "本当に消しますか？"}, class: "btn btn-sm btn-danger destroy_book_58592") %></td>
+            <% end %>
+          <tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

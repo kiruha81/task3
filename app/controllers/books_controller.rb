@@ -2,9 +2,9 @@ class BooksController < ApplicationController
   before_action :correct_user, only: [:edit, :update]
   def show
     @bookid = Book.find(params[:id])
-    @users = @bookid.user
-    @user = current_user
-    @books = Book.new
+    @user = @bookid.user
+    @book = Book.new
+    @books = Book.all
   end
 
   def create
@@ -28,13 +28,13 @@ class BooksController < ApplicationController
 
   def update
     @book = Book.find(params[:id])
-    if @book.user_id = current_user.id
-      @book.update(book_params)
+    @book.user_id = current_user.id
+    if @book.update(book_params)
+      flash[:notice] = "You have updated book successfully."
+      redirect_to book_path(@book.id)
     else
-      redirect_to book_path
+      render :edit
     end
-    flash[:notice] = "You have updated book successfully."
-    redirect_to book_path
   end
 
   def index

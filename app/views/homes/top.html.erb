@@ -1,9 +1,29 @@
-welcome to Bookers !!<br>
-In Bookers,<br>
-<br>
-you can share and exchange your opinions , inpressions , and emotions<br>
-<br>
-about various books!<br>
-<br>
-<%= link_to "Log in", new_user_session_path %><br>
-<%= link_to "Sign up", new_user_registration_path %>
+<main>
+<%= flash[:notice] %>
+  <div class="container">
+    <div class="row">
+      <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+        <h1>welcome to <i class="fas fa-book"></i>Bookers !!</h1>
+        In <i class="fas fa-book"></i><strong>Bookers</strong>,
+        <br><br>
+        <p>you can share and exchange your opinions , inpressions , and emotions</p>
+        <p>about various books!</p>
+        <br>
+        <div class="btn-wrapper col-10 mx-auto">
+          <div class="row">
+            <%= link_to new_user_session_path, class: "btn btn-info btn-sm btn-block mb-3 sign_in" do %>
+            <span>Log in</span>
+            <% end %>
+          </div>
+        </div>
+        <div class="btn-wrapper col-10 mx-auto">
+          <div class="row">
+            <%= link_to new_user_registration_path, class: "btn btn-success btn-sm btn-block sign_up" do %>
+            <span>Sign up</span>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
